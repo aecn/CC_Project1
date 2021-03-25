@@ -1,29 +1,32 @@
 // Annie Chen - Project 1
 
-// story is told by the mouse click
-// Inspiration of scene 5 https://p5js.org/examples/objects-array-of-objects.html.
+// story is told by the mouse click (8 scenes total, then resets automatically to 1 after 8th scene)
+
+// Some sources I used for inspiration:
+//https://p5js.org/examples/objects-array-of-objects.html
+//shiffman - https://www.youtube.com/watch?v=UcdigVaIYAk
 
 var scene = 1; // scene variable declared globally
 
-// scenes 1-2-3
+// scenes 1,2,3,4(part of it),8
 //these are variations of the leaf
 let leaf1; 
 let leaf2;
 let leaf3;
 
-// scene 4: particle movement begins
+// scenes 4 & 5: particle movement (bouce) begins
 let positionX = 500;
 let positionY = 400;
 let speedX = 20;
 let speedY = 25;
 let radius = 25;
 
-// scene 5: particles bouncing
+// scene 6: particles jittering/shaking
 let particleX;
 let changeDirection;
 let particle = []; // array of particle objects
 
-// scene 6: fire and smoke
+// scene 7: sizzling fire effect
 let fire = [];
 let numFire = 40;
 
@@ -31,11 +34,12 @@ let numFire = 40;
 function setup() {
   createCanvas(1000, 800); 
 
-// scenes 1,2,3
+// scenes 1,2,3,4,8
 leaf1 = new Leaf(200, 700);
 leaf2 = new Leaf(480, 950);
+leaf3 = new Leaf(180, 1200);
 
-// scene 5
+// scene 4 & 5
 for (let p = 0; p < 50; p++) { 
   particle.push(new Orb()); // class called
 }
@@ -44,50 +48,104 @@ for (let p = 0; p < 50; p++) {
 function draw() {
 // scene 1: a delicious buffalo wing is presented to you. Go ahead and take a bite by clicking!
 if (scene == 1) {
-  background("#ffd500");
+  background("#ffd500"); // yellow
   plate(500, 400); // plate
   plateInner(500, 400);
-  wing(500, 400); 
-  leaf1.display();
-  scale(0.8);
-  leaf2.display();
+  wing(500, 400);
   sauceCup(800, 600);
   sauce(800, 600);
+  leaf1.display();
+  push();
+  scale(0.8);
+  leaf2.display();
+  pop();
+  push();
+  scale(0.5);
+  leaf3.display(); // smaller size leaf
+  pop();
 }
 
 // scene 2: You take a bite. Yum!
 // wing pattern is modified to have a "bite". The background color becomes brighter.
 if (scene == 2) {
-  background("#ffea00");
+  background("#ffea00"); // lighter yellow
   plate(500, 400); // plate
   plateInner(500, 400);
   bite1(500, 400);
-  leaf1.display();
-  scale(0.8);
-  leaf2.display();
   sauceCup(800, 600);
   sauce(800, 600);
+  leaf1.display();
+  push();
+  scale(0.8);
+  leaf2.display();
+  pop();
+  push();
+  scale(0.5);
+  leaf3.display(); // smaller size leaf
+  pop();
 } 
 
 // scene 3: (continuation to scene 2). 2nd bite --> Panic arises as you start to realize how spicy the wing is.
 // the wing starts to flash red, orange-red colors. You could see how much it burns now.
 if (scene == 3) {
-  background("#fbff12");
+  background("#fbff12"); // lightest yellow
   plate(500, 400); // plate
   plateInner(500, 400);
-  frameRate(5); // slower
-  noStroke();
-  fill(random(240, 255),random(30,255), 0, this.alpha);
+  frameRate(5);
+  fill(random(240, 255),random(30,255), 0, this.alpha); // random flashing to represent true spiciness
   bite2(500, 400);
+  sauceCup(800, 600);
+  sauce(800, 600);
   leaf1.display();
+  push();
   scale(0.8);
   leaf2.display();
-  sauceCup(800, 600);
+  pop();
+  push();
+  scale(0.5);
+  leaf3.display(); // smaller size leaf
+  pop();
 } 
 
-    // scene 4: the initial wave of spiciness hits you
+    // scene 4: the spiciness starts to overtake the screen. click when the entire screen fills up
     if (scene == 4) {
-      background("#ff8500");
+    // the ellipses cover the previous background 
+      frameRate(60);
+      stroke("#d00000");
+      strokeWeight(2);
+      fill(208, 0, 0, 150); // colors vaey in opacity
+      ellipse(positionX, positionY, radius * 2, radius * 2); // different spicy particles, played around with the variables for diff. movement
+      fill(208, 0, 0, 49); // different shades of orange and red
+      ellipse(positionX*2, positionY*2.5, radius, radius); // multiplication
+      fill(220, 47, 2, 120);
+      ellipse(positionX*3, positionY, radius * 2, radius * 2);
+      fill(208, 0, 0, 150);
+      ellipse(positionX/2, positionY*1.5, radius * 2, radius * 2); // division
+      fill(246, 170, 28, 180);
+      ellipse(positionX, positionY*4, radius * 2, radius * 2);
+      ellipse(positionX*1.5, positionY*1.5, radius * 2, radius * 2);
+      fill(208, 0, 0, 85);
+      ellipse(positionX*2, positionY/1.5, radius * 4.5, radius * 4.5); // initial position change
+      ellipse(100, positionY*1.5, radius * 3, radius * 3);
+      fill(251, 119, 37, 200);
+      ellipse(positionX*3.5, 350, radius * 6, radius * 6);
+      fill(208, 0, 0, 50);
+      ellipse(850, positionY*4.7, radius * 4, radius * 4);
+      fill(244, 140, 6, 160);
+      ellipse(positionX*5, positionY*1.5, radius * 2, radius * 2);
+      positionX += speedX; // position and speed are a function of each other
+      positionY += speedY;
+      if (positionX > width - radius || positionX < radius) { // if x position reaches width (exlcuding radius change), then change directions
+        speedX = -speedX;
+      }
+      if (positionY > height - radius || positionY < radius) { // if y position reaches width (excluding radius change), then change directions
+        speedY = -speedY;
+      }
+    }
+
+    // scene 5: fully abstract now. spicy particles go everywhere
+      if (scene == 5) {
+      background("#e85d04");
       frameRate(60);
       stroke("#d00000");
       strokeWeight(2);
@@ -121,8 +179,8 @@ if (scene == 3) {
       }
     }
 
-// scene 5: this feeling begins to overtake you. Your tastebuds are on fire. the rapid particles represent the spice flavor tingling!
-if (scene == 5) {
+// scene 6: this feeling begins to overtake you. Your tastebuds are on fire. the rapid particles represent the spice flavor tingling!
+if (scene == 6) {
   frameRate(50);
   background("#ff5400");
   for (let p = 0; p < particle.length; p++) {
@@ -130,9 +188,9 @@ if (scene == 5) {
     particle[p].display();
   }
 }
-// scene 6: fire-like effect
-if (scene == 6) {
-  frameRate(20);
+// scene 7: fire-like effect
+if (scene == 7) {
+  frameRate(30);
   background("#dc2f02");
   for(let m = fire.length -5; m>=0; m--){
     fire[m].move();
@@ -147,6 +205,26 @@ if (scene == 6) {
   let size = random(30, 160); // size ranges from 30-160 
   let f = new Fire(x, y, size);
   fire.push(f);
+}
+// scene 8: snap back to reality. After an attack of spiciness, your vision is clear again.
+// overlap with previous scene is on purpose to demonstrate that new knowledge, that yes, the wing is spicy
+if (scene == 8) {
+  frameRate(15);
+  plate(500, 400); // plate
+  plateInner(500, 400);
+  fill(random(240, 255),random(30,255), 0); // random flashing to represent true spiciness
+  bite2(500, 400);
+  sauceCup(800, 600);
+  sauce(800, 600);
+  leaf1.display();
+  push();
+  scale(0.8);
+  leaf2.display();
+  pop();
+  push();
+  scale(0.5);
+  leaf3.display(); // smaller size leaf
+  pop();
 }
 }
 
@@ -341,21 +419,21 @@ function sauceCup(posX, posY){ // cup itself
   strokeWeight(2);
   fill("#F4F4F6");
   scale(1);
-  ellipse(1050, 500, 350, 350);
+  ellipse(830, 400, 300, 300);
 }
 
 function sauce(posX, posY){ // sauce itself
   stroke("#b08968");
   fill("#faedcd");
   scale(1);
-  ellipse(1050, 500, 300, 300);
-  ellipse(1000, 450, 10, 10);
-  ellipse(1100, 600, 10, 10);
+  ellipse(830, 400, 250, 250);
+  ellipse(800, 450, 10, 10);
+  ellipse(890, 330, 10, 10);
 }
 
 function mousePressed() { // controls the scene switch
   scene = scene + 1;
-  if (scene > 6) {
+  if (scene > 8) {
     scene = 1;
   }
 }
