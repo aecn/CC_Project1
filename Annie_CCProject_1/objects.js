@@ -1,69 +1,43 @@
-// this won't be in the final project:
-// I wanted to find a way to be able to drag the buffalo wing to the mouth of the person,
-// I played around with some code from Shiffman and the p5js website
+// //CLASSES: will move these here soon
 
-// class BuffaloWing {
-//   constructor(x, y, w, h, a, b) {
-//     this.dragging = false; // Is the object being dragged?
-//     this.rollover = false; // Is the mouse over the ellipse?
-//     this.x = x;
-//     this.y = y;
-//     this.w = w;
-//     this.h = h;
-//     this.offsetX = 0;
-//     this.offsetY = 0;
+// // sizzling orbs, for spicy feeling
+// class Orb {
+//   constructor() {
+//     this.x = random(1000); // fill up the canvas randomly
+//     this.y = random(800); // fill up the canvas randomly 
+//     this.size = random(10, 80); // size of ellipse is random
+//     this.speed = 10; // rapid speed = represents the spiciness in a person's mouth
 //   }
 
-//   over() {
-//     // Is mouse over object
-//     if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
-//       this.rollover = true;
-//     } else {
-//       this.rollover = false;
-//     }
+//   update() { // how the orbs are updated
+//     this.x += random(-this.speed, this.speed); // move by the speed
+//     this.y += random(-this.speed, this.speed); // move by the speed
 //   }
 
-//   update() {
-//     // Adjust location if being dragged
-//     if (this.dragging) {
-//       this.x = mouseX + this.offsetX;
-//       this.y = mouseY + this.offsetY;
-//     }
-//   }
-
-//   show() {
-//     stroke(0);
-//     // Different fill based on state
-//     if (this.dragging) {
-
-//     }
-//   } else if (this.rollover) {
-//     fill(100);
-//   } 
-
-// pressed() {
-//
-//     if (mouseX > this.x && mouseX < this.x + this.w && mouseY > this.y && mouseY < this.y + this.h) {
-//       this.dragging = true;
-//       // If so, keep track of relative location of click to corner of rectangle
-//       this.offsetX = this.x - mouseX;
-//       this.offsetY = this.y - mouseY;
-//     }
-//   }
-
-//   released() {
-//     // Quit dragging
-//     this.dragging = false;
+//   display() { // what the orbs look like
+//     fill("#dc2f02");
+//     ellipse(this.x, this.y, this.size, this.size); // the x&y coordinates + the size is random
 //   }
 // }
 
+// // leaves, for decoration purposes
+// class Leaf {
 
-//   function wing() {
-//   fill("#ff7900"); // orange
-//   triangle(440, 690, 440, 610, 580, 650);
-//   ellipse(450, 650, 80, 80); // chicken wing (interactive one)
-//   rect(480, 635, 100, 30, 10, 20); 
-//   fill("#ffaa00"); // gold
-//   triangle(440, 700, 440, 710, 540, 650); // bottom highlight
-//   triangle(450, 620, 450, 630, 480, 640);
+//   constructor(x, y) {
+//     this.posX = x;
+//     this.posY = y;
+//   }
+
+//   display(){ // orig (200, 700)
+//     noStroke();
+//     fill("#70e000");
+//     triangle(this.posX-100, this.posY+100, this.posX, this.posY+100, this.posX, this.posY);
+//     fill("#38b000");
+//     triangle(this.posX-100, this.posY, this.posX, this.posY, this.posX-100, this.posY+100);
+//     fill("#008000");
+//     triangle(this.posX, this.posY, this.posX-100, this.posY, this.posX+100, this.posY-100);
+//     fill("#9ef01a");
+//     triangle(this.posX, this.posY+100, this.posX, this.posY, this.posX+100, this.posY-100);
+//   }
+
 // }
