@@ -1,4 +1,4 @@
-// Annie Chen - Project 1
+// Annie Chen - Project 1 - edited after feedback
 
 // story is told by the mouse click (8 scenes total, then resets automatically to 1 after 8th scene)
 
@@ -49,11 +49,14 @@ function draw() {
 // scene 1: a delicious buffalo wing is presented to you. Go ahead and take a bite by clicking!
 if (scene == 1) {
   background("#ffd500"); // yellow
+  shadows();
   plate(500, 400); // plate
   plateInner(500, 400);
+  plateDecor(500, 400);
   wing(500, 400);
   sauceCup(800, 600);
   sauce(800, 600);
+  sauceDetail(500, 400);
   leaf1.display();
   push();
   scale(0.8);
@@ -63,17 +66,21 @@ if (scene == 1) {
   scale(0.5);
   leaf3.display(); // smaller size leaf
   pop();
+  cup(500, 400);
 }
 
 // scene 2: You take a bite. Yum!
 // wing pattern is modified to have a "bite". The background color becomes brighter.
 if (scene == 2) {
   background("#ffea00"); // lighter yellow
+  shadows();
   plate(500, 400); // plate
   plateInner(500, 400);
+  plateDecor(500, 400);
   bite1(500, 400);
   sauceCup(800, 600);
   sauce(800, 600);
+  sauceDetail2(500, 400);
   leaf1.display();
   push();
   scale(0.8);
@@ -83,19 +90,23 @@ if (scene == 2) {
   scale(0.5);
   leaf3.display(); // smaller size leaf
   pop();
+  cup(500, 400);
 } 
 
 // scene 3: (continuation to scene 2). 2nd bite --> Panic arises as you start to realize how spicy the wing is.
 // the wing starts to flash red, orange-red colors. You could see how much it burns now.
 if (scene == 3) {
   background("#fbff12"); // lightest yellow
+  shadows();
   plate(500, 400); // plate
   plateInner(500, 400);
+  plateDecor(500, 400);
   frameRate(5);
   fill(random(240, 255),random(30,255), 0, this.alpha); // random flashing to represent true spiciness
   bite2(500, 400);
   sauceCup(800, 600);
   sauce(800, 600);
+  sauceDetail3(500, 400);
   leaf1.display();
   push();
   scale(0.8);
@@ -105,6 +116,7 @@ if (scene == 3) {
   scale(0.5);
   leaf3.display(); // smaller size leaf
   pop();
+  cup(500, 400);
 } 
 
     // scene 4: the spiciness starts to overtake the screen. click when the entire screen fills up
@@ -144,45 +156,45 @@ if (scene == 3) {
     }
 
     // scene 5: fully abstract now. spicy particles go everywhere
-      if (scene == 5) {
-      background("#e85d04");
-      frameRate(60);
-      stroke("#d00000");
-      strokeWeight(2);
-      fill("#d00000");
-      ellipse(positionX, positionY, radius * 2, radius * 2); // different spicy particles, played around with the variables for diff. movement
-      fill("#d00000"); // different shades of orange and red
-      ellipse(positionX*2, positionY*2.5, radius, radius); // multiplication
-      fill("#dc2f02");
-      ellipse(positionX*3, positionY, radius * 2, radius * 2);
-      fill("#d00000");
-      ellipse(positionX/2, positionY*1.5, radius * 2, radius * 2); // division
-      fill("#f6aa1c");
-      ellipse(positionX, positionY*4, radius * 2, radius * 2);
-      ellipse(positionX*1.5, positionY*1.5, radius * 2, radius * 2);
-      fill("#d00000");
-      ellipse(positionX*2, positionY/1.5, radius * 4.5, radius * 4.5); // initial position change
-      ellipse(100, positionY*1.5, radius * 3, radius * 3);
-      fill("#fb7725");
-      ellipse(positionX*3.5, 350, radius * 6, radius * 6);
-      fill("#d00000");
-      ellipse(850, positionY*4.7, radius * 4, radius * 4);
-      fill("#f48c06");
-      ellipse(positionX*5, positionY*1.5, radius * 2, radius * 2);
-      positionX += speedX; // position and speed are a function of each other
-      positionY += speedY;
-      if (positionX > width - radius || positionX < radius) { // if x position reaches width (exlcuding radius change), then change directions
-        speedX = -speedX;
-      }
-      if (positionY > height - radius || positionY < radius) { // if y position reaches width (excluding radius change), then change directions
-        speedY = -speedY;
-      }
+  if (scene == 5) {
+    background("#e85d04");
+    frameRate(60);
+    stroke("#d00000");
+    strokeWeight(2);
+    fill("#d00000");
+    ellipse(positionX, positionY, radius * 2, radius * 2); // different spicy particles, played around with the variables for diff. movement
+    fill("#d00000"); // different shades of orange and red
+    ellipse(positionX*2, positionY*2.5, radius, radius); // multiplication
+    fill("#dc2f02");
+    ellipse(positionX*3, positionY, radius * 2, radius * 2);
+    fill("#d00000");
+    ellipse(positionX/2, positionY*1.5, radius * 2, radius * 2); // division
+    fill("#f6aa1c");
+    ellipse(positionX, positionY*4, radius * 2, radius * 2);
+    ellipse(positionX*1.5, positionY*1.5, radius * 2, radius * 2);
+    fill("#d00000");
+    ellipse(positionX*2, positionY/1.5, radius * 4.5, radius * 4.5); // initial position change
+    ellipse(100, positionY*1.5, radius * 3, radius * 3);
+    fill("#fb7725");
+    ellipse(positionX*3.5, 350, radius * 6, radius * 6);
+    fill("#d00000");
+    ellipse(850, positionY*4.7, radius * 4, radius * 4);
+    fill("#f48c06");
+    ellipse(positionX*5, positionY*1.5, radius * 2, radius * 2);
+    positionX += speedX; // position and speed are a function of each other
+    positionY += speedY;
+    if (positionX > width - radius || positionX < radius) { // if x position reaches width (exlcuding radius change), then change directions
+      speedX = -speedX;
     }
+    if (positionY > height - radius || positionY < radius) { // if y position reaches width (excluding radius change), then change directions
+      speedY = -speedY;
+    }
+  }
 
 // scene 6: this feeling begins to overtake you. Your tastebuds are on fire. the rapid particles represent the spice flavor tingling!
 if (scene == 6) {
   frameRate(50);
-  background("#ff5400");
+  background("#f77f00");
   for (let p = 0; p < particle.length; p++) {
     particle[p].update();
     particle[p].display();
@@ -208,14 +220,17 @@ if (scene == 7) {
 }
 // scene 8: snap back to reality. After an attack of spiciness, your vision is clear again.
 // overlap with previous scene is on purpose to demonstrate that new knowledge, that yes, the wing is spicy
+// water cup is empty
 if (scene == 8) {
   frameRate(15);
   plate(500, 400); // plate
   plateInner(500, 400);
+  plateDecor(500, 400);
   fill(random(240, 255),random(30,255), 0); // random flashing to represent true spiciness
   bite2(500, 400);
   sauceCup(800, 600);
   sauce(800, 600);
+  sauceDetail3(500, 400);
   leaf1.display();
   push();
   scale(0.8);
@@ -225,6 +240,7 @@ if (scene == 8) {
   scale(0.5);
   leaf3.display(); // smaller size leaf
   pop();
+  cup2(500, 400);
 }
 }
 
@@ -354,6 +370,7 @@ function bite1(posX, posY){
 
 // buffalo wing gets 2nd bite. This one is accompanied by the first feeling of spiciness
 function bite2(posX, posY){
+  noStroke();
   for(x = 40; x<width; x+=40){
     for(y = 40; y<height; y+=40){
     if(x>=100 && x<=140 && y>=260 && y<=460){ // row 1
@@ -429,6 +446,68 @@ function sauce(posX, posY){ // sauce itself
   ellipse(830, 400, 250, 250);
   ellipse(800, 450, 10, 10);
   ellipse(890, 330, 10, 10);
+}
+
+function sauceDetail(posX, posY){
+  noStroke();
+  fill("#EDCB96"); // sauce shading
+  arc(840, 400, 200, 200, 0, HALF_PI);
+}
+
+function sauceDetail2(posX, posY){
+  noStroke();
+  fill("#EDCB96"); // sauce shading
+  arc(840, 400, 200, 200, PI, HALF_PI);  
+}
+
+function sauceDetail3(posX, posY){
+  noStroke();
+  fill("#EDCB96"); // sauce shading
+  arc(840, 400, 200, 200, HALF_PI, HALF_PI);   
+}
+
+function plateDecor(posX, posY){
+    fill("#CAF7E2");
+    stroke("#58B09C");
+    mid = 440;
+    circ = 26;
+    angle = Math.PI*2 / circ;
+    rad = 390;
+    circRad = sin(angle/2) * rad;
+
+    for(let w = 0; w < circ; w++){
+
+        xCirc = mid + cos(angle*w) * rad;
+        yCirc = mid - sin(angle*w) * rad;
+
+        ellipse(xCirc-8, yCirc+20, circRad, circRad);
+    }
+}
+
+function cup(posX, posY){
+  stroke("#9999a1");
+  fill("#f4f4f6"); // outer cup
+  ellipse(920, 5, 400, 400);
+  fill("#90e0ef"); // outer blue
+  ellipse(920, 5, 350, 350); 
+  noStroke();
+  fill("#caf0f8"); // inner blue
+  ellipse(920, 5, 300, 300);
+}
+
+function cup2(posX, posY){ 
+  stroke("#9999a1");
+  fill("#f4f4f6"); // outer cup
+  ellipse(920, 5, 400, 400);
+  fill("#e6e6e9"); // ring
+  ellipse(920, 5, 350, 350); 
+}
+
+function shadows(){
+  fill("#fcbf49"); // darker yellow
+  ellipse(380, 450, 900, 900); // plate shadow
+  ellipse(880, 5, 400, 400); // cup shadow
+  ellipse(830, 450, 300, 300); // sauce cup shadow
 }
 
 function mousePressed() { // controls the scene switch

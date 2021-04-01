@@ -13,7 +13,9 @@ class Orb {
   }
 
   display() { // what the orbs look like
-    fill("#dc2f02");
+    fill("#FF0000");
     ellipse(this.x, this.y, this.size, this.size); // the x&y coordinates + the size is random
   }
 }
+
+// "#dc2f02"

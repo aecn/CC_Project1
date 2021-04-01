@@ -6,7 +6,7 @@ class Fire {
     this.size = fireSize;
   }
   display() { // what each fire particle looks like 
-    noStroke();
+    stroke("#FF0000");
     fill(random(200,230), random(50, 150), 20, this.alpha); // random shades of red-orange with some transparency
     ellipse(this.x, this.y, this.size); // x, y, size changes
   }
