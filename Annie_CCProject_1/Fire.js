@@ -12,6 +12,6 @@ class Fire {
   }
   move() {
     this.x = this.x + random(-100, 100);
-    this.y = this.y + random(1,3);
+    this.y = this.y + random(1,5);
   }
 }

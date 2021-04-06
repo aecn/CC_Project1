@@ -27,7 +27,7 @@ let changeDirection;
 let particle = []; // array of particle objects
 
 // scene 7: sizzling fire effect
-let fire = [];
+let fire = []; // array of fire particles
 let numFire = 40;
 
 
@@ -39,9 +39,9 @@ leaf1 = new Leaf(200, 700);
 leaf2 = new Leaf(480, 950);
 leaf3 = new Leaf(180, 1200);
 
-// scene 4 & 5
-for (let p = 0; p < 50; p++) { 
-  particle.push(new Orb()); // class called
+// scene 6
+for (let p = 0; p < 150; p++) { // up to 150 particles from 0
+  particle.push(new Orb()); // class called, particle pushed
 }
 }
 
@@ -195,7 +195,7 @@ if (scene == 3) {
 if (scene == 6) {
   frameRate(50);
   background("#f77f00");
-  for (let p = 0; p < particle.length; p++) {
+  for (let p = 0; p < particle.length; p++) { // array, access length of 150
     particle[p].update();
     particle[p].display();
   }
@@ -209,7 +209,7 @@ if (scene == 7) {
     fire[m].display();
 
     if(fire[m].size <= 0){
-      fire.splice(m, 1);  // deletes extra build up of fire to run more smoothlys
+      fire.splice(m, 1);  // deletes extra build up of fire to run more smoothly
     }
   }// these are for additional fire particles
   let x = 500;
@@ -470,17 +470,17 @@ function plateDecor(posX, posY){
     fill("#CAF7E2");
     stroke("#58B09C");
     mid = 440;
-    circ = 26;
-    angle = Math.PI*2 / circ;
-    rad = 390;
+    circ = 26; // # of circles
+    angle = Math.PI*2 / circ; // divide full circle by individual circles
+    rad = 390; // radius
     circRad = sin(angle/2) * rad;
 
-    for(let w = 0; w < circ; w++){
+    for(let w = 0; w < circ; w++){ // draw circles in a ring
 
         xCirc = mid + cos(angle*w) * rad;
         yCirc = mid - sin(angle*w) * rad;
 
-        ellipse(xCirc-8, yCirc+20, circRad, circRad);
+        ellipse(xCirc-8, yCirc+20, circRad, circRad); // positioning of the ring
     }
 }
 
